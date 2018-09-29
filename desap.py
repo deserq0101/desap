@@ -2,6 +2,39 @@
 # -*- coding: utf-8 -*-
 import os, sys
 import time
+import os.path
+def ver():
+	print "verificando metasploit"
+	time.sleep(0.5)
+	pasta="/data/data/com.termux/files/home/metasploit-framework"
+	patch=str(os.path.exists(pasta))
+	if patch == "True":
+		print "METASPLOIT INSTALADO"
+		time.sleep(1)
+		os.system("clear")
+		menu()
+	else:
+		print "METASPLOIT NÃO INSTALADO"
+		print '''
+1(instalar metasploit)
+2(sair)
+		'''
+		op=raw_input("=={")
+		if op == 1:
+			os.system("apt update -y; apt install curl")
+			os.system("curl -LO https://Auxilus.github.io/metasploit.sh")
+			os.system("clear")
+			os.system("sh metasploit.sh")
+			os.system("clear")
+			print "tudo pronto"
+			time.sleep(1)
+			ver()
+		elif op == 2:
+			print "saindo..."
+			time.sleep(1)
+			os.exit(0)
+		else:
+			print "errro: 404"
 def menu():
 	os.system("clear")
 	print '''
@@ -61,5 +94,6 @@ def erro():
 		menu()
 	except:
 		print "ERRO: 404"
+ver()
 menu()
 erro()
