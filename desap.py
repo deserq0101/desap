@@ -6,9 +6,13 @@ import os.path
 def ver():
 	print "verificando metasploit"
 	time.sleep(0.5)
+	exploit="/exploit"
+	ff=str(os.path.exists(exploit))
 	pasta="/data/data/com.termux/files/home/metasploit-framework"
 	patch=str(os.path.exists(pasta))
-	if patch == "True":
+	if ff =! "True":
+		os.system("mkdir exploit")
+	elif patch == "True":
 		print "METASPLOIT INSTALADO"
 		time.sleep(1)
 		os.system("clear")
