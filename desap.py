@@ -1,48 +1,47 @@
 #!/usr/bin/python2
 # -*- coding: utf-8 -*-
-import os, sys
-import time
+import os, sys, time
+from time import sleep
 import os.path
 def ver():
 	print "verificando metasploit"
 	time.sleep(0.5)
-	stogare="$HOME/storage"
+	stogare="/data/data/com.termux/files/home/storage"
 	exploit="/sdcard/exploit"
-	ff=str(os.path.exists(exploit))
 	pasta="/data/data/com.termux/files/home/metasploit-framework"
+	ff=str(os.path.exists(exploit))
 	patch=str(os.path.exists(pasta))
 	tf=str(os.path.exists(stogare))
-	if ff != "True":
-		os.system("mkdir /sdcard/exploit")
-	elif tf != "True":
-		os.system("termux-setup-storage")
-	elif patch == "True":
-		print "METASPLOIT INSTALADO"
-		time.sleep(1)
-		os.system("clear")
-		menu()
-	else:
-		print "METASPLOIT NÃO INSTALADO"
-		print '''
-1(instalar metasploit)
-2(sair)
-		'''
-		op=raw_input("=={")
-		if op == 1:
-			os.system("apt update -y; apt install curl")
-			os.system("curl -LO https://Auxilus.github.io/metasploit.sh")
-			os.system("clear")
-			os.system("sh metasploit.sh")
-			os.system("clear")
-			print "tudo pronto"
-			time.sleep(1)
-			ver()
-		elif op == 2:
-			print "saindo..."
-			time.sleep(1)
-			os.exit(0)
-		else:
-			print "errro: 404"
+	lista={"ff","patch","ft"}
+	for item in lista:
+		if tf == "False":
+			os.system("termux-setup-storage")
+		print "VERIFICANDO PASTA: %s"%(item)
+		sleep(0.2)
+		os.system("clear'")
+		if ff == "False":
+		    os.system("mkdir /sdcard/exploit")
+		elif patch == "False":
+			print "metasploit não instalado"
+			print '''
+			1{INSTALAR}
+			2{SAIR}
+			'''
+			op=int(raw_input("=={"))
+			if op == 1:
+				print "----------------------------------------------"
+				print "baixando metasploit"
+				os.system("apt install curl git -y")
+				os.system("curl -LO https://Auxilus.github.io/metasploit.sh")
+				os.system("sh metasploit.sh")
+				os.system("clear")
+				print "pronto"
+				ver()
+			elif op == 2:
+				print "saindo"
+				exit(0)
+				exit()
+		
 def menu():
 	os.system("clear")
 	print '''
